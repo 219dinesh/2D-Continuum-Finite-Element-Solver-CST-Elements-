@@ -21,7 +21,8 @@ Hooke's law in 2D relates the stress vector $\boldsymbol{\sigma} = [\sigma_{xx},
 
 For a thin plate where out-of-plane stresses are zero (**Plane Stress**), the matrix is defined using Young's Modulus ($E$) and Poisson's ratio ($\nu$):
 
-$$ \mathbf{D} = \frac{E}{1 - \nu^2} \begin{bmatrix} 1 & \nu & 0 \\ \nu & 1 & 0 \\ 0 & 0 & \frac{1 - \nu}{2} \end{bmatrix} $$
+$$ \mathbf{D} = \frac{E}{1 - \nu^2} \begin{bmatrix} 1 & \nu & 0 \\ 
+\nu & 1 & 0 \\ 0 & 0 & \frac{1 - \nu}{2} \end{bmatrix} $$
 
 ### 2. The Strain-Displacement Matrix ($\mathbf{B}$)
 The $\mathbf{B}$ matrix relates the nodal displacements $\mathbf{u}_e = [u_1, v_1, u_2, v_2, u_3, v_3]^T$ directly to the internal strains: $\boldsymbol{\epsilon} = \mathbf{B} \mathbf{u}_e$.
@@ -32,7 +33,9 @@ For a CST element, $\mathbf{B}$ is a $3 \times 6$ matrix derived from the geomet
 
 Using the area of the triangle ($A$), the $\mathbf{B}$ matrix is assembled as:
 
-$$ \mathbf{B} = \frac{1}{2A} \begin{bmatrix} \beta_1 & 0 & \beta_2 & 0 & \beta_3 & 0 \\ 0 & \gamma_1 & 0 & \gamma_2 & 0 & \gamma_3 \\ \gamma_1 & \beta_1 & \gamma_2 & \beta_2 & \gamma_3 & \beta_3 \end{bmatrix} $$
+$$ \mathbf{B} = \frac{1}{2A} \begin{bmatrix} \beta_1 & 0 & \beta_2 & 0 & \beta_3 & 0 \\ 
+0 & \gamma_1 & 0 & \gamma_2 & 0 & \gamma_3 \\ 
+\gamma_1 & \beta_1 & \gamma_2 & \beta_2 & \gamma_3 & \beta_3 \end{bmatrix} $$
 
 ### 3. The Element Stiffness Matrix ($\mathbf{K}_e$)
 The general formula for element stiffness is the volume integral $\int \mathbf{B}^T \mathbf{D} \mathbf{B} dV$. 
@@ -88,17 +91,3 @@ Element 1:
   Tau_xy   = 0.00 MPa
 ```
 Notice how the Poisson effect is visible in the nodal displacements: as the plate stretches in the X-direction (1.00e-04), it symmetrically contracts in the Y-direction (+7.50e-06 at the bottom right, -7.50e-06 at the top right)!
-
-
----
-
-To help visualize how the Constant Strain Triangle geometry mathematically warps under load, I've created an interactive visualizer below. You can apply extreme loads to the right edge and watch the planar nodes shift.
-
-<GenerateWidget height="600px" component_placeholder_id="im_60ee80e634a99226">
-```json
-{
-  "widgetSpec": {
-    "height": "600px",
-    "prompt": "Objective: Visualize the deformation of a 2D rectangular plate modeled with 2 Constant Strain Triangles (CST) under an axial load.\nData State: 4 nodes at (0,0), (2,0), (2,1), (0,1). Fixed left edge (nodes 0, 3). Free right edge. Elements: [0,1,2] and [0,2,3]. Thickness t=0.01m, E=200e9 Pa, nu=0.3. Default right edge load: 50000 N per node.\nStrategy: Standard Layout.\nInputs: Slider for 'Right Edge Axial Load (N)' ranging from 0 to 500000. Slider for 'Deformation Scale Factor' ranging from 1 to 5000 to exaggerate the displacement visually.\nBehavior: Render a 2D coordinate space. Draw the original 2-triangle mesh with dashed lines. Calculate the nodal displacements in real-time using the CST FEA plane stress formulation (K=t*A*B^T*D*B). Draw the deformed mesh dynamically with solid lines, showing the nodes shifting based on the applied load and scale factor. Visually distinguish the fixed left edge from the moving nodes. Display the numerical displacements (u_x, u_y) of Nodes 1 and 2 dynamically below the visualizer."
-  }
-}
