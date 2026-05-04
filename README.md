@@ -22,7 +22,8 @@ Hooke's law in 2D relates the stress vector $\boldsymbol{\sigma} = [\sigma_{xx},
 For a thin plate where out-of-plane stresses are zero (**Plane Stress**), the matrix is defined using Young's Modulus ($E$) and Poisson's ratio ($\nu$):
 
 $$ \mathbf{D} = \frac{E}{1 - \nu^2} \begin{bmatrix} 1 & \nu & 0 \\ 
-\nu & 1 & 0 \\ 0 & 0 & \frac{1 - \nu}{2} \end{bmatrix} $$
+\nu & 1 & 0 \\
+0 & 0 & \frac{1 - \nu}{2} \end{bmatrix} $$
 
 ### 2. The Strain-Displacement Matrix ($\mathbf{B}$)
 The $\mathbf{B}$ matrix relates the nodal displacements $\mathbf{u}_e = [u_1, v_1, u_2, v_2, u_3, v_3]^T$ directly to the internal strains: $\boldsymbol{\epsilon} = \mathbf{B} \mathbf{u}_e$.
